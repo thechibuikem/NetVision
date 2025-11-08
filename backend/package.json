@@ -1,0 +1,22 @@
+{
+  "name": "netvision-backend",
+  "version": "0.0.0",
+  "description": "A backend for Chukwuemeka Davids netvision",
+  "main": "index.js",
+  "type": "module",
+  "scripts": {
+    "test": "node --watch server.js"
+  },
+  "keywords": [
+    "networking",
+    "react",
+    "express"
+  ],
+  "author": "Chukwuemeka David",
+  "license": "ISC",
+  "dependencies": {
+    "cors": "^2.8.5",
+    "dotenv": "^17.2.3",
+    "express": "^5.1.0"
+  }
+}
