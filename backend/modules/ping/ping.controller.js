@@ -1,17 +1,16 @@
-import { pingService } from "./ping.service.js";
-
+import { devices } from "../network/network.db.js";
 
 export async function ping(req, res) {
   const { sourceIp, destinationIp } = req.body;
 
-  // const response = await pingService(sourceIp,destinationIp)
 
-  const response = await pingService("192.168.1.1", "192.168.1.2");
+// find sourceDevice
+const sourceDevice = devices.find(device => device.ip === sourceIp)
+  if (!sourceDevice) {
+    return res.status(404).json({ error: "Source device not found" });
+  }
 
-  // res.json({
-  //   status:200,
-  //   message:`Yo! you pinged ${response}`
-  // })
+await sourceDevice.ping(destinationIp)//the ping process itself
+res.json({ status: 200, message: "Ping process complete" });
 
-  console.log(response)
 }

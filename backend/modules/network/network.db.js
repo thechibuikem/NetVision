@@ -1,11 +1,10 @@
-import { type } from "os";
+import {PC,Switch,Router } from "./network.class.js";
 
 export const pcs = [
   {
     name: "PC1",
     ip: "192.168.1.1",
     mac: "AA:AA:AA:AA:AA:AA",
-    // type:"pc",
     interface: "f0/0", //fast ethernet 0
     lan: "LAN1",
     arp: [],
@@ -14,7 +13,6 @@ export const pcs = [
     name: "PC2",
     ip: "192.168.1.2",
     mac: "BB:BB:BB:BB:BB:BB",
-    // type:"pc",
     interface: "f0/1", //fast ethernet 0
     lan: "LAN2",
     arp: [{ mac: "AA:AA:AA:AA:AA:AA", name: "PC1" }],
@@ -23,7 +21,6 @@ export const pcs = [
     name: "PC3",
     ip: "255.1.1.1",
     mac: "CC:CC:CC:CC:CC:CC",
-    // type:"pc",
     interface: "g0/0", //fast ethernet 0
     lan: "LAN1",
     arp: [],
@@ -32,7 +29,6 @@ export const pcs = [
     name: "PC4",
     ip: "255.1.1.2",
     mac: "DD:DD:DD:DD:DD:DD",
-    // type:"pc",
     interface: "g0/1", //fast ethernet 0
     lan: "LAN2",
     arp: [],
@@ -40,12 +36,11 @@ export const pcs = [
 ];
 
 // our lans switches
-export const switches = [
+ const switches = [
   {
     name: "SW1",
     ip: "",
     mac: "",
-    // type: "switch",
     interface: "f0/0", //fast ethernet 0
     lan: "LAN1",
     arp: [],
@@ -54,39 +49,100 @@ export const switches = [
     name: "SW2",
     ip: "",
     mac: "",
-    // type: "switch",
     interface: "f0/1", //fast ethernet 0
     lan: "LAN2",
     arp: [],
   },
 ];
 
-// Arp table 
-const routerARP = [  
-// e.g. { sourceIP: "192.168.1.2", destIP: "192.168.2.2", resolvedMAC: "AA:BB:CC:DD:EE:03" }
-]
-
 // our LANs router
 const router = {
   name: "router",
-  ip1: "",
-  ip2: "",
-  type: "router",
-  interface1: "",
+  mac: "",
+  ips: [],
+  interfaces: [],
   arp: [],
 };
 
-// 
+//creating an array of pc instances from pc class and pcs array of object
+ const pCInstances = pcs.map(
+  p=> new PC(p.name,p.mac,p.arp,p.ip,p.interface,p.lan)
+)
+
+ const switchInstances = switches.map(
+  sw => new Switch(sw.name,sw.mac, sw.arp,sw.ip,sw.interface,sw.lan)
+)
+
+const routerInstance = new Router(router.name, router.mac,router.arp, router.ips,router.interfaces);
 
 // exporting an array devices as containing all devices we'd use in our network
 export const devices = [
-  ...pcs.map((pc) => ({ ...pc, type: "pc" })),
-  ...switches.map((sw) => ({ ...sw, type: "switch" })),
-  router,
+...pCInstances,
+...switchInstances,
+routerInstance
 ];
 
-// const devices = [{...pcs,type:"pc"},{...switches,type:"switch"},router]
+// Assigning ids to my devices array in a new array for mmy front-end
+const devicesWithIds = devices.map((device, index) => ({
+  id: index, // assign new unique id starting from 0
+  ...device, // keep existing properties
+}));
 
-export let arpTable = [
-  // e.g. { sourceIP: "192.168.1.2", destIP: "192.168.2.2", resolvedMAC: "AA:BB:CC:DD:EE:03" }
-];
+
+//function to expose devices in backend to frontend
+
+export function exposeDevices (){
+   return devicesWithIds;
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+// export let arpTable = [
+//   // e.g. { sourceIP: "192.168.1.2", destIP: "192.168.2.2", resolvedMAC: "AA:BB:CC:DD:EE:03" }
+// ];
