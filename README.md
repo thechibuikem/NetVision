@@ -49,7 +49,6 @@
 <img src="https://img.shields.io/badge/DSA-RECURSION-orange?style=for-the-badge" alt="styff">
 <img src="https://img.shields.io/badge/Networking-TCP/IP-green?style=for-the-badge">
 
-</dpiv>
 
 </p>
 
