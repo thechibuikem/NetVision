@@ -31,7 +31,7 @@
 
 
 <p align="center">
- <h1 align='center'> Vitrual Network Simmulator </h1>
+ <h1 align='center'> Vitrual Network Simulator </h1>
 
 <br>
  
