@@ -43,11 +43,13 @@
   <img src="https://img.shields.io/badge/Status-Work%20in%20Progress-orange?style=for-the-badge" alt="Project Status">
 </p>
 
-<!-- <div align="center"> -->
-  ![OOP](https://img.shields.io/badge/OOP-Object%20Oriented%20Programming-blue?style=for-the-badge)
-  ![DSA](https://img.shields.io/badge/DSA-RECURSION-orange?style=for-the-badge)
-  ![Networking](https://img.shields.io/badge/Networking-TCP/IP-green?style=for-the-badge)
-<!-- </div> -->
+<p align="center">
+
+<img src="https://img.shields.io/badge/OOP-Object%20Oriented%20Programming-blue?style=for-the-badge">
+<img src="https://img.shields.io/badge/DSA-RECURSION-orange?style=for-the-badge" alt="styff">
+<img src="https://img.shields.io/badge/Networking-TCP/IP-green?style=for-the-badge">
+
+</dpiv>
 
 </p>
 
