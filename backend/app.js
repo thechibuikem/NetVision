@@ -1,7 +1,7 @@
 import express from "express"
 import cors from "cors"
-import pingsRouter from "./modules/ping/ping.route.js";
-import logsRouter from "./modules/logs/logs.route.js";
+import pingsRouter from "./modules/ping/routes/ping.route.js";
+import logsRouter from "./modules/logs/route/logs.route.js";
 
 // initialize app
 const app = express();

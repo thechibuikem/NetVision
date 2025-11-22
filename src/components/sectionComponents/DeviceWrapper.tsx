@@ -1,21 +1,21 @@
+import { useEffect } from "react";
 import { MdComputer } from "react-icons/md";
 import { HiOutlineSwitchHorizontal } from "react-icons/hi";
 import { BsRouter } from "react-icons/bs";
-// import type { IconType } from "react-icons";
-// import type { ReactElement } from "react";
-// import { useCallback} from "react";
-import { type NetworkDeviceProps } from "../BluePrints/NetworkDevice";
-import NetworkDevice from "../BluePrints/NetworkDevice";
-import {
+import ReactFlow, {
+  ReactFlowProvider,
   Handle,
   Position,
   type NodeProps,
-  type Node,
-  type Edge,
+  Background,
+  useReactFlow,
 } from "reactflow";
-import ReactFlow, { Background } from "reactflow";
 import "reactflow/dist/style.css";
+import NetworkDevice ,{ type NetworkDeviceProps } from "../BluePrints/NetworkDevice";
+import SectionTitle from "../BluePrints/SectionTitle";
 
+
+// creating custom node for reactFlow
 const DeviceNode: React.FC<NodeProps<NetworkDeviceProps>> = ({ data }) => {
   return (
     <div>
@@ -24,10 +24,11 @@ const DeviceNode: React.FC<NodeProps<NetworkDeviceProps>> = ({ data }) => {
       <Handle type="target" position={Position.Left} />
     </div>
   );
-};
-// creating a node type for my re-usuable device component
+}
+// registering custom nodes for reactflow
 const nodeTypes = { deviceNode: DeviceNode };
 
+// initailizing nodes that would be in our reactFlow with their positions
 const initialNodes = [
   {
     id: "1",
@@ -83,62 +84,53 @@ const initialEdges = [
   { id: "e1-2", source: "5", target: "7", type: "straight" },
 ];
 
+// initializing entire reactFlow graph component
 export default function NetworkFlow() {
-  // const [nodes] = useNodesState(initialNodes);
-  // const [edges] = useEdgesState(initialEdges);
-
   return (
-    <div className="h-96 w-3xl flex justify-center items-center bg-black">
-      <ReactFlow
-        nodes={initialNodes}
-        edges={initialEdges}
-        nodeTypes={nodeTypes}
-      >
-        <Background />
-      </ReactFlow>
-    </div>
+    <section className=" w-full lg:w-[60%] lg:h-[80vh]">
+      <SectionTitle name="Networks" />
+
+      <div className="lg:h-full h-[50vh] border w-full border-[#ffffff30] rounded-lg shadow-sm hover:shadow-xl shadow-[#1a4f265b] hover:-translate-y-1 transition-all duration-300 justify-center items-center bg-black">
+        <ReactFlowProvider>
+          <NetworkFlowInner />
+        </ReactFlowProvider>
+      </div>
+    </section>
   );
 }
 
-// function DeviceWrapper() {
-//       // type for my objects in device spawner
-//   type DeviceSpawner = {
-//       id:number,
-//       icon:IconType
-//   }
 
-//   const devicesArray: DeviceSpawner[] = [
-//       // pcs
-//       { id: 0, icon: HiMiniComputerDesktop },
-//       { id: 1, icon: HiMiniComputerDesktop },
-//       { id: 2, icon: HiMiniComputerDesktop },
-//       { id: 3, icon: HiMiniComputerDesktop },
-//       // switches
-//       { id: 4, icon: HiOutlineSwitchHorizontal },
-//       { id: 5, icon: HiOutlineSwitchHorizontal },
-//       // router
-//       { id: 6, icon: BsRouter },
-//   ];
+// inner reactFlow component, where I can use useReactFlow because it's wrapped with a provider
+function NetworkFlowInner() {
+  const { setViewport } = useReactFlow();
 
-//   // converting devices Array into an array of network Icons that I can use
-//   const NetworkComponents:ReactElement[]=  devicesArray.map(
-//       (device) => (
-//     <NetworkDevice
-//       Logo={< device.icon size={40} />}
-//       deviceId= {device.id}
-//     />
-//   )
+  useEffect(() => {
+    const width = window.innerWidth;
 
-//   );
+    if (width < 600) {
+      setViewport({ x: 25, y: 100, zoom: 0.35 });
+    } else if (width < 1024) {
+      setViewport({ x: 100, y: 150, zoom: 0.6 });
+    } else if (width < 1600) {
+      setViewport({ x: 100, y: 100, zoom: 0.6 });
+    } else {
+      setViewport({ x: 100, y: 100, zoom: 1 });
+    }
 
-//   // actual stuff being returned in page
-//     return (
-//       <figure className="flex gap-8">
-//         {NetworkComponents[2]}
-//         {NetworkComponents[6]}
-//         {NetworkComponents[4]}
-//       </figure>
-//     );
-//   }
 
-// export default DeviceWrapper
+
+  }, [setViewport]);
+
+  return (
+    <ReactFlow
+      nodes={initialNodes}
+      edges={initialEdges}
+      nodeTypes={nodeTypes}
+      proOptions={{ hideAttribution: true }}
+      defaultViewport={{ x: 150, y: 100, zoom: 0.1 }}
+    >
+      <Background />
+    </ReactFlow>
+  );
+}
+

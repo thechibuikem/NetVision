@@ -63,7 +63,7 @@ Born in the heart of fundamental networking, built on react + express. Netvision
 
 # Features
 
-- **Device Modeling** - Simulates virtual models of real world computer network components such as PCs, Switches and routers with properties such as mac addresses,IP Addresses, ARP Tables and methods such as Ping Sending using OOP.  
+- **Device Modeling** - Simulates virtual models of real world computer network components such as PCs, Switches and routers with properties such as mac addresses,IP Addresses, ARP Tables and methods such as Logging and Ping Sending using OOP.  
 - **Network Topology** - Simulates a virtual setup of a real-world network by integrating react flow to create a star topology.  
 - **Ping Visualization** - Visualizes the process of sending packets across lans by integrating react flow to display animations.  
 - **Logs Visualization** - Visualizes low level processes such as ICMP and ARP requests and responses in the backend via websockets through a react component.  

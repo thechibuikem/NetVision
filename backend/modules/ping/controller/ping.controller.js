@@ -1,5 +1,6 @@
-import { devices } from "../network/network.db.js";
+import { devices } from "../../network/database/network.db.js";
 
+// controller to send pingd
 export async function ping(req, res) {
   const { sourceIp, destinationIp } = req.body;
 

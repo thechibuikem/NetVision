@@ -1,6 +1,7 @@
-import {PC,Switch,Router } from "./network.class.js";
+import {PC,Switch,Router } from "../class/network.class.js";
 
-export const pcs = [
+// The arrays holding our device elements
+ const pcs = [
   {
     name: "PC1",
     ip: "192.168.1.1",
@@ -39,16 +40,16 @@ export const pcs = [
  const switches = [
   {
     name: "SW1",
-    ip: "",
-    mac: "",
+    ip: "192.168.1.0",
+    mac: "EE:EE:EE:EE:EE:EE",
     interface: "f0/0", //fast ethernet 0
     lan: "LAN1",
     arp: [],
   },
   {
     name: "SW2",
-    ip: "",
-    mac: "",
+    ip: "255.1.0.0",
+    mac: "FF:FF:FF:FF:FF:FF",
     interface: "f0/1", //fast ethernet 0
     lan: "LAN2",
     arp: [],
@@ -58,9 +59,9 @@ export const pcs = [
 // our LANs router
 const router = {
   name: "router",
-  mac: "",
-  ips: [],
-  interfaces: [],
+  mac: "GG:GG:GG:GG:GG:GG",
+  ips: ["192.168.1.0","255.1.0.0"],
+  interfaces: ["f0/0","g0/0"],
   arp: [],
 };
 
@@ -76,24 +77,15 @@ const router = {
 const routerInstance = new Router(router.name, router.mac,router.arp, router.ips,router.interfaces);
 
 // exporting an array devices as containing all devices we'd use in our network
-export const devices = [
-...pCInstances,
-...switchInstances,
-routerInstance
-];
+const devicesWithoutId = [...pCInstances, ...switchInstances, routerInstance];
 
 // Assigning ids to my devices array in a new array for mmy front-end
-const devicesWithIds = devices.map((device, index) => ({
+export const devices = devicesWithoutId.map((device, index) => ({
   id: index, // assign new unique id starting from 0
   ...device, // keep existing properties
 }));
 
 
-//function to expose devices in backend to frontend
-
-export function exposeDevices (){
-   return devicesWithIds;
-}
 
 
 

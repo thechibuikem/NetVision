@@ -1,7 +1,6 @@
 import Tippy from "@tippyjs/react";
 import { type FC, type ReactElement, useContext } from "react";
 import { AppContext} from "../../api/context";
-import React from "react";
 
 export type NetworkDeviceProps = {
   Logo: ReactElement;
@@ -29,28 +28,25 @@ function AdditionalInfo () {
 const NetworkDevice: FC<NetworkDeviceProps> = ({ Logo, deviceId }):ReactElement => {
   // initializing context
   const context = useContext(AppContext);
-
   if (!context) {
-    // safety check so TypeScript doesn’t panic
     console.log("Network Device must be inside app provider");
   }
-
+// destructuring devices state from our context
   const { devices } = context;
 
-  // const requiredDevice = devices.find(device=>device.id == deviceId)
+  // identifying required device object
   const requiredDevice = devices[deviceId];
 
-  // Clone the icon and inject size
-  // const iconWithSize = Logo && React.cloneElement(Logo,{size:48});
+
 
   return (
     <figure className="text-white flex flex-col items-center gap-y-2 border-dashed border-white relative">
       {/* Network device Icon */}
       <Tippy
-        className="absolute top-1/2 left-1/2 -translate-x-1/2 shadow-xl shadow-[#1a4f265b]"
+        className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/4 shadow-xl shadow-[#1a4f265b]"
         content={<AdditionalInfo />}
       >
-        <div className="hover:shadow-md flex justify-center items-center  shadow-[#1a4f265b] border border-[#2dd11079] cursor-pointer w-24 aspect-square rounded-md">
+        <div className="shadow-lg flex justify-center items-center  shadow-[#1a4f265b] border border-[#2dd11079] bg-black cursor-pointer w-24 aspect-square rounded-md">
           {/* {iconWithSize} */}
           {Logo}
         </div>

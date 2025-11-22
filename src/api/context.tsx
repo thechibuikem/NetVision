@@ -1,42 +1,51 @@
-import React, { createContext, useState, useEffect,type ReactNode } from "react";
+// BASICALLY ALL WE DO HERE IS TO SET UP A CONTEXT THAT EXPOSES AN ARRAY CALLED DEVICES WHERE WE'D STORE OUR DEVICES AND WITHIN OUR CONTEXT PROVIDER, WE SET UP A USE EFFECT THAT SENDS A GET REQUEST TO OUR BACKEND ROUTE THAT EXPOSES OUR ARRAY OF DEVICES
 
-// Create contextType
+
+import React, {
+  createContext,
+  useState,
+  useEffect,
+  type ReactNode,
+} from "react";
 
 // The Type for arpTable which is an object
 interface arpTable {
   [ip: string]: string;
 }
 
-//A Basic device in our network should have these
+// Every Basic device in our network should have these
 export type Device = {
-    id:number,
-    deviceName:string,
-    ip:string,
-    mac:string
-    arp:arpTable
-}
-
+  deviceName: string;
+  ip: string;
+  mac: string;
+  arp: arpTable;
+};
 
 type AppContextType = {
   devices: Device[];
   setDevices: React.Dispatch<React.SetStateAction<Device[]>>;
+showPing:boolean;
+setShowPing:React.Dispatch<React.SetStateAction<boolean>>
+
 };
 
 // creating context and setting it's default to undefined
 export const AppContext = createContext<AppContextType>({
   devices: [],
-  setDevices: () => {
-    ;
-  },
+  setDevices: () => {},
+  showPing:false,
+  setShowPing:(showPing)=>{!showPing}
 });
 
+// Provider for our context
 export const AppProvider = ({ children }: { children: ReactNode }) => {
   const [devices, setDevices] = useState<Device[]>([]);
+  const [showPing,setShowPing]= useState<boolean>(false)
 
-//   Backend endpoint to retrieve devices
-  const endPoint = "http://localhost:5000/api/devices";
+  //   Backend endpoint to retrieve devices
+  const endPoint = "http://localhost:5000/api/network/devices";
 
-//   Side effect to retrieve devices
+  //   Side effect to retrieve devices from Backend
   useEffect(() => {
     (async () => {
       try {
@@ -45,30 +54,21 @@ export const AppProvider = ({ children }: { children: ReactNode }) => {
           console.log("Backend Response is not okay");
           return;
         }
-
-        const data = await res.json(); // extract json data from endpoint
-
         //retrieving array of device objects
-        const retrievedDevices = (data.devices);
+        const data = await res.json();
+        const retrievedDevices = data.devices;
 
-        console.log("Devices",retrievedDevices)
-        // const devicesData = data.devices; // extract array of devices object from backend
-        setDevices(retrievedDevices);//populate our devices state with device data from backend
-
-        // console.log("devicesData", devicesData);
+        console.log("Devices", retrievedDevices);
+        setDevices(retrievedDevices); //populate our devices state with device data from backend
       } catch (err) {
-        // console.error(err);
+        console.error(err);
       }
     })();
   }, [endPoint]);
 
-
-
-
-
   return React.createElement(
     AppContext.Provider,
-    { value: { devices, setDevices } },
+    { value: { devices, setDevices ,showPing,setShowPing} },
     children
   );
 };

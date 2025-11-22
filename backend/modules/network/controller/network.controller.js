@@ -1,6 +1,9 @@
-import {exposeDevices } from "./network.db.js"
+import { exposeDevices } from "../service/network.service.js";
+
+// controller that uses Expose Devices service
 export function getDevices (req,res){
 
+  // using exposeDevices service to retrieve devices db
    const retrievedDevices = exposeDevices()
 
     if (!retrievedDevices) {

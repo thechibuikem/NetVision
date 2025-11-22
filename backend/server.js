@@ -1,30 +1,31 @@
 // importing dependencies
-// import app from "./app.js";
-// import dotenv from "dotenv"
-
-//setting up environmental variables
-// dotenv.config()
-
-// const PORT = process.env.PORT||5000
-
-// app.listen(PORT, () => {
-//   console.log(`Server running on port ${PORT}`);
-// });
-
-
+import http from "http"
 import express from "express";
-import pingRoutes from "./modules/ping/ping.route.js";
-import { ping } from "./modules/ping/ping.controller.js";
-import { getDevices } from "./modules/network/network.controller.js";
 import cors from "cors"
+import pingRoutes from "./modules/ping/routes/ping.route.js";
+import networkRoutes from "./modules/network/routes/network.routes.js"
+import { WebSocketServer } from "ws";
+
 
 const app = express();
+
+export const server = http.createServer(app);
+
+
+
+
+
 app.use(express.json());
 app.use(cors())
-app.use("/api", pingRoutes);
-app.get("/api/devices",getDevices)//route to retrieve network devices
+app.use("/api/ping", pingRoutes);
+app.use("/api/network",networkRoutes)//route for networks
+// handling websocket operations
 
-app.listen(5000, async () => {
+
+export const wss = new WebSocketServer({ server });// Create WebSocket server on the HTTP server
+
+
+server.listen(5000, async () => {
   console.log("Server running on port 5000 \n\n");
 
   // // Run ping on start
