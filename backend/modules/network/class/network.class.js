@@ -16,7 +16,7 @@ export class Device {
   }
 
   //send ping method
-  async ping(destinationIP, round = 0, limit = 5) {
+  async ping(destinationIP, round = 1, limit = 4) {
     //base recursive condition
     if (round > limit) {
       console.log("ping process complete \n");
@@ -40,9 +40,9 @@ export class Device {
         await arpRequest(this, destinationIP); // send ARP request out to complete a round
         //
         // await this.ping(destinationIP, round + 1, limit); 
-         setTimeout(3000, async () => {
+         setTimeout( async () => {
     await this.ping(destinationIP, round + 1, limit);
-                });
+                },3000);
       }
       //===== If recieving device is present on source devices ARP table====
       else {
@@ -55,9 +55,9 @@ export class Device {
           `ICMP ECHO from ${this.mac} to ${receivingDevice.mac} \n`
         );
         //
-         setTimeout(3000, async () => {
+         setTimeout( async () => {
           await this.ping(destinationIP, round + 1, limit);
-        });
+        },3000);
       }
     }
   }

@@ -3,7 +3,7 @@ import {PC,Switch,Router } from "../class/network.class.js";
 // The arrays holding our device elements
  const pcs = [
   {
-    name: "PC1",
+    name: "PC 1",
     ip: "192.168.1.1",
     mac: "AA:AA:AA:AA:AA:AA",
     interface: "f0/0", //fast ethernet 0
@@ -11,7 +11,7 @@ import {PC,Switch,Router } from "../class/network.class.js";
     arp: [],
   },
   {
-    name: "PC2",
+    name: "PC 2",
     ip: "192.168.1.2",
     mac: "BB:BB:BB:BB:BB:BB",
     interface: "f0/1", //fast ethernet 0
@@ -19,7 +19,7 @@ import {PC,Switch,Router } from "../class/network.class.js";
     arp: [{ mac: "AA:AA:AA:AA:AA:AA", name: "PC1" }],
   },
   {
-    name: "PC3",
+    name: "PC 3",
     ip: "255.1.1.1",
     mac: "CC:CC:CC:CC:CC:CC",
     interface: "g0/0", //fast ethernet 0
@@ -27,7 +27,7 @@ import {PC,Switch,Router } from "../class/network.class.js";
     arp: [],
   },
   {
-    name: "PC4",
+    name: "PC 4",
     ip: "255.1.1.2",
     mac: "DD:DD:DD:DD:DD:DD",
     interface: "g0/1", //fast ethernet 0
@@ -39,7 +39,7 @@ import {PC,Switch,Router } from "../class/network.class.js";
 // our lans switches
  const switches = [
   {
-    name: "SW1",
+    name: "SW 1",
     ip: "192.168.1.0",
     mac: "EE:EE:EE:EE:EE:EE",
     interface: "f0/0", //fast ethernet 0
@@ -47,7 +47,7 @@ import {PC,Switch,Router } from "../class/network.class.js";
     arp: [],
   },
   {
-    name: "SW2",
+    name: "SW 2",
     ip: "255.1.0.0",
     mac: "FF:FF:FF:FF:FF:FF",
     interface: "f0/1", //fast ethernet 0
@@ -58,7 +58,7 @@ import {PC,Switch,Router } from "../class/network.class.js";
 
 // our LANs router
 const router = {
-  name: "router",
+  name: "ROUTER",
   mac: "GG:GG:GG:GG:GG:GG",
   ips: ["192.168.1.0","255.1.0.0"],
   interfaces: ["f0/0","g0/0"],
@@ -77,15 +77,21 @@ const router = {
 const routerInstance = new Router(router.name, router.mac,router.arp, router.ips,router.interfaces);
 
 // exporting an array devices as containing all devices we'd use in our network
+
+
 const devicesWithoutId = [...pCInstances, ...switchInstances, routerInstance];
 
-// Assigning ids to my devices array in a new array for mmy front-end
-export const devices = devicesWithoutId.map((device, index) => ({
-  id: index, // assign new unique id starting from 0
-  ...device, // keep existing properties
-}));
+// assigning an id tp each device
+devicesWithoutId.forEach((device,index)=>{device.id = index})
 
+export const devices = devicesWithoutId;
+// // Assigning ids to my devices array in a new array for mmy front-end
+// export const devices = devicesWithoutId.map((device, index) => ({
+//   id: index, // assign new unique id starting from 0
+//   ...device, // keep existing properties
+// }));
 
+console.log(devices)
 
 
 

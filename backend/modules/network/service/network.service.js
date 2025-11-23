@@ -1,16 +1,10 @@
 import { devices } from "../database/network.db.js"
 
 
-
-
-
 //function to expose devices in backend to frontend
-
 export function exposeDevices (){
    return devices;
 }
-
-
 
 
 

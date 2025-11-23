@@ -3,5 +3,6 @@ import { ping } from "../controller/ping.controller.js";//contoller to send ping
 
 // initializing router
 const router = express.Router();
-router.get("/", ping);
+// router.get("/", ping);
+router.post('/sendPing',ping)
 export default router
