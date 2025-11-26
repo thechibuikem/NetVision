@@ -15,15 +15,15 @@ import {PC,Switch,Router } from "../class/network.class.js";
     ip: "192.168.1.2",
     mac: "BB:BB:BB:BB:BB:BB",
     interface: "f0/1", //fast ethernet 0
-    lan: "LAN2",
-    arp: [{ mac: "AA:AA:AA:AA:AA:AA", name: "PC1" }],
+    lan: "LAN1",
+    arp: [],
   },
   {
     name: "PC 3",
     ip: "255.1.1.1",
     mac: "CC:CC:CC:CC:CC:CC",
     interface: "g0/0", //fast ethernet 0
-    lan: "LAN1",
+    lan: "LAN2",
     arp: [],
   },
   {
@@ -85,11 +85,6 @@ const devicesWithoutId = [...pCInstances, ...switchInstances, routerInstance];
 devicesWithoutId.forEach((device,index)=>{device.id = index})
 
 export const devices = devicesWithoutId;
-// // Assigning ids to my devices array in a new array for mmy front-end
-// export const devices = devicesWithoutId.map((device, index) => ({
-//   id: index, // assign new unique id starting from 0
-//   ...device, // keep existing properties
-// }));
 
 console.log(devices)
 

@@ -1,7 +1,9 @@
 import { logEvent } from "../../logs/service/logs.service.js"; //reporter function to send reports of events to front-end
 import { arpRequest } from "../service/network.service.js";
+import { animateEvent } from "../../animatePacket/service/animatePacket.service.js";
+import { devices } from "../database/network.db.js";
 
-// base device class having default ping function
+ //root class of networking devices in out system that we'll use to create other classes
 export class Device {
   constructor(deviceName, mac, arp = [], type) {
     this.deviceName = deviceName;
@@ -9,6 +11,13 @@ export class Device {
     this.arp = arp;
     this.type = type;
   }
+
+
+//function to send route for animation
+async animate(destinationIP){
+  const destinationDevice = devices.find(device=>(device.ip == destinationIP))
+  await animateEvent(this,destinationDevice)
+}
 
   // function for devices to log
   async log(actionType, targetIP, layer, message) {
@@ -38,8 +47,6 @@ export class Device {
           `Who has ${destinationIP}? Tell ${this.mac} \n`
         );
         await arpRequest(this, destinationIP); // send ARP request out to complete a round
-        //
-        // await this.ping(destinationIP, round + 1, limit); 
          setTimeout( async () => {
     await this.ping(destinationIP, round + 1, limit);
                 },3000);
@@ -55,14 +62,15 @@ export class Device {
           `ICMP ECHO from ${this.mac} to ${receivingDevice.mac} \n`
         );
         //
+        this.animate(destinationIP)
          setTimeout( async () => {
           await this.ping(destinationIP, round + 1, limit);
         },3000);
       }
     }
   }
-} //root class of networking devices in out system that we'll use to create other classes
-
+}
+//Class for Pcs in our system, that we'll use as key players in our system
 export class PC extends Device {
   constructor(deviceName, mac, arp = [], ip, networkInterface, lan) {
     super(deviceName, mac, arp, "pc");
@@ -70,8 +78,8 @@ export class PC extends Device {
     this.networkInterface = networkInterface;
     this.lan = lan;
   }
-} //Class for Pcs in our system, that we'll use as key players in our system
-
+} 
+ //Class for switch, that serve as connectors within LANs
 export class Switch extends Device {
   constructor(deviceName, mac, arp = [], ip, networkInterface, lan) {
     super(deviceName, mac, arp, "switch");
@@ -79,8 +87,8 @@ export class Switch extends Device {
     this.networkInterface = networkInterface;
     this.lan = lan;
   }
-} //Class for switch, that serve as connectors within LANs
-
+}
+//Class for Routers, that serve as connectors between LANs
 export class Router extends Device {
   constructor(deviceName, mac, arp = [], ip = [], networkInterfaces) {
     super(deviceName, mac, arp, "router");
@@ -88,4 +96,4 @@ export class Router extends Device {
     this.ip = ip;
     this.networkInterfaces = networkInterfaces;
   }
-} //Class for Routers, that serve as connectors between LANs
+} 

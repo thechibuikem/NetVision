@@ -19,14 +19,18 @@ app.use("/api/network",networkRoutes)//route for networks
 
 
 export const wss = new WebSocketServer({ server });// Create WebSocket server on the HTTP server
+wss.on("connection", (ws) => {
+  console.log("Client connected");
+
+  ws.on("message", (msg) => {
+    console.log("Received:", msg.toString());
+  });
+
+  ws.send(JSON.stringify({ type: "init", message: "hello client" }));
+});
+
 
 
 server.listen(5000, async () => {
-  console.log("Server running on port 5000 \n\n");
-
-  // // Run ping on start
-  // await ping(
-  //   { body: { sourceIp: "192.168.1.1", destinationIp: "255.1.1.2" } },
-  //   { json: console.log } // mock Express res.json
-  // );
+  console.log("Server running on port 5000 ✅");
 });

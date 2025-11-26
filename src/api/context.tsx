@@ -8,17 +8,26 @@ import React, {
   type ReactNode,
 } from "react";
 
+
+interface ARPEntry{
+  mac:string,
+  ip:string
+}
+
 // The Type for arpTable which is an object
-interface arpTable {
+export interface arpTable {
   [ip: string]: string;
 }
 
 // Every Basic device in our network should have these
 export type Device = {
+  id:number
   deviceName: string;
   ip: string;
   mac: string;
-  arp: arpTable;
+  networkInterface?: string;
+  // interfaces?: string[];
+  arp: ARPEntry[];
 };
 
 type AppContextType = {
@@ -41,7 +50,7 @@ export const AppContext = createContext<AppContextType>({
 export const AppProvider = ({ children }: { children: ReactNode }) => {
   const [devices, setDevices] = useState<Device[]>([]);
   const [showPing,setShowPing]= useState<boolean>(false)
-
+// console.log(devices)
   //   Backend endpoint to retrieve devices
   const endPoint = "http://localhost:5000/api/network/devices";
 
@@ -58,7 +67,7 @@ export const AppProvider = ({ children }: { children: ReactNode }) => {
         const data = await res.json();
         const retrievedDevices = data.devices;
 
-        console.log("Devices", retrievedDevices);
+        // console.log("Devices", retrievedDevices);
         setDevices(retrievedDevices); //populate our devices state with device data from backend
       } catch (err) {
         console.error(err);

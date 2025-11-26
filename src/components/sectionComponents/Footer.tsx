@@ -2,8 +2,8 @@ import { type FC } from "react";
 
 const Footer: FC = () => {
   return (
-    <section className="mx-4 md:mx-8 mt-8 bg-black flex items-center justify-center py-4 border-t border-[#ffffff30]">
-      <h5 className="text-[#479d3c8b] text-sm"> © 2025 NetVision, made with love ♥️</h5>
+    <section className="mx-4 md:mx-8 mt-8 mb-4 bg-black flex items-center justify-center py-4 border-t border-[#ffffff15] transparent-black-cards">
+      <h5 className="text-[#e6e8e6bb] text-sm">David Chukwuemeka © 2025 NetVision</h5>
     </section>
   );
 };
