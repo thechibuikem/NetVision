@@ -1,6 +1,6 @@
 import { AppProvider } from "./api/context"
-import DeviceWrapper from "./components/sectionComponents/DeviceWrapper";
-import NetworkFlow from "./components/sectionComponents/DeviceWrapper";
+// import DeviceWrapper from "./components/sectionComponents/DeviceWrapper";
+// import NetworkFlow from "./components/sectionComponents/DeviceWrapper";
 import Home from "./components/Home";
 
 function App() {
