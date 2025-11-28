@@ -24,7 +24,7 @@ export function L3Log({message}:LogsProp) {
 
 export function Log({ message }: LogsProp) {
   return (
-    <div className="transparent-cards rounded-sm p-2 text-[12px] cursor-pointer duration-200 transition-all">
+    <div className="transparent-cards rounded-sm p-2 md:p-2 text-[12px] md:text-[1rem] cursor-pointer duration-200 transition-all">
       {message}
     </div>
   );

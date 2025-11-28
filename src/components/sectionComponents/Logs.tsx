@@ -24,12 +24,10 @@ function Logs(): ReactElement {
   };
 // },[])
 
-        // console.log("logsArray :",logsArray);
-
-  return (
-    <section className=" w-full lg:w-[40%] lg:h-[80vh] h-[30vh] ">
+   return (
+    <section className=" w-full lg:w-[40%] lg:min-h-[80vh] h-[30vh] min-h-fit ">
       <SectionTitle name="Logs" />
-      <figure className="w-full md:min-h-[80vh] h-full  flex flex-col  rounded-lg border-[#ffffff30] border p-4 gap-4 cursor-pointer transition-all shadow-sm hover:shadow-xl shadow-[#1a4f265b] duration-300 transparent-black-cards">
+      <figure className="w-full md:min-h-[80vh] h-full flex flex-col  rounded-lg border-[#ffffff30] border p-4 gap-4 cursor-pointer transition-all shadow-sm hover:shadow-xl shadow-[#1a4f265b] duration-300 transparent-black-cards overflow-scroll">
         {logsArray.map(
           (log, index) =>(<Log key={index} message={log.message} />)
         )}

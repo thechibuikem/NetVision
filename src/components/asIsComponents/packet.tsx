@@ -7,12 +7,12 @@ interface PacketProps{
 export default function Packet({ x, y }:PacketProps) {
   return (
     <div
-className="absolute w-4 aspect-square rounded-full bg-[#670303f4] z-50"
+className="absolute w-3 aspect-square rounded-full bg-[#55981ed0] z-50"
       style={{
         left: x,
         top: y,
         transform: "translate(-50%, -50%)",
-        transition: "all 0.2s linear",
+        transition: "all 0.4s linear",
       }}
     ></div>
   );

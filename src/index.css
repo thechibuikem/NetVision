@@ -15,3 +15,7 @@
 body{
   background-color: black;
 }
+
+.zImportant{
+  z-index: 999999 !important
+}

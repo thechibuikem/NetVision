@@ -31,25 +31,36 @@ export type Device = {
 };
 
 type AppContextType = {
+  // Array of devices from back-end
   devices: Device[];
   setDevices: React.Dispatch<React.SetStateAction<Device[]>>;
-showPing:boolean;
-setShowPing:React.Dispatch<React.SetStateAction<boolean>>
-
+  // Determine if ping modal is visible or not
+  showPing: boolean;
+  setShowPing: React.Dispatch<React.SetStateAction<boolean>>;
+// checking if there's an ongoing Post request
+  isSubmitting: boolean;
+  setIsSubmitting: React.Dispatch<React.SetStateAction<boolean>>;
 };
 
 // creating context and setting it's default to undefined
 export const AppContext = createContext<AppContextType>({
   devices: [],
   setDevices: () => {},
-  showPing:false,
-  setShowPing:(showPing)=>{!showPing}
+  showPing: false,
+  setShowPing: (showPing) => {
+    showPing;
+  },
+  isSubmitting: false,
+  setIsSubmitting: (isSubmitting) => {
+    isSubmitting;
+  },
 });
 
 // Provider for our context
 export const AppProvider = ({ children }: { children: ReactNode }) => {
   const [devices, setDevices] = useState<Device[]>([]);
   const [showPing,setShowPing]= useState<boolean>(false)
+  const [isSubmitting, setIsSubmitting] = useState<boolean>(false);
 // console.log(devices)
   //   Backend endpoint to retrieve devices
   const endPoint = "http://localhost:5000/api/network/devices";
@@ -77,7 +88,16 @@ export const AppProvider = ({ children }: { children: ReactNode }) => {
 
   return React.createElement(
     AppContext.Provider,
-    { value: { devices, setDevices ,showPing,setShowPing} },
+    {
+      value: {
+        devices,
+        setDevices,
+        showPing,
+        setShowPing,
+        isSubmitting,
+        setIsSubmitting,
+      },
+    },
     children
   );
 };

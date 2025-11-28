@@ -86,7 +86,7 @@ devicesWithoutId.forEach((device,index)=>{device.id = index})
 
 export const devices = devicesWithoutId;
 
-console.log(devices)
+// console.log(devices)
 
 
 
