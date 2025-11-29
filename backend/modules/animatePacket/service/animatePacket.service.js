@@ -3,82 +3,11 @@ import WebSocket from "ws";
 import { devices } from "../../network/database/network.db.js"
 
 
-// // function to get key-players in ICMP animation
-function getKeyPlayers(sourceDevice){
-  // // 2. get all devices on same LAN, except source
-  // const lanMembers = devices.filter(
-  //   (d) => d.lan === sourceDevice.lan && d.mac !== sourceDevice.mac
-  // );
 
-  //flag to determinine if this is a singlway or multiway message
-  let homeSwitch = devices.find(
-    (device) => device.type == "switch" && device.lan == sourceDevice.lan
-  ); //fetch the switch local to our sourceDevice
-  let awaySwitch = devices.find(
-    (device) => device.type == "switch" && device.lan !== sourceDevice.lan
-  ); //detect remote switch
-  const router = devices.find((device) => device.type == "router"); //grab router
-
-
-  // console.log("home switch: \n",homeSwitch,
-  //   "away switch: \n",
-  //   awaySwitch,
-  //   "router: \n",router)
-  return { homeSwitch, awaySwitch, router };
-}
-
-// // function to get key-players in ARP animation
-// async function getICMPAnimationKeyPlayers(sourceDevice,destinationDevice){
-//   const sameLan = sourceDevice.lan === destinationDevice.lan; //flag to determinine if this is a singlway or multiway message
-//   let homeSwitch = devices.find(
-//     (device) => device.type == "switch" && device.lan == sourceDevice.lan
-//   ); //fetch the switch local to our sourceDevice
-//   let awaySwitch = devices.find(
-//     (device) => device.type == "switch" && device.ip !== homeSwitch.ip
-//   ); //detect remote switch
-//   const router = devices.find((device) => device.type == "router"); //grab router
-
-//  return {sameLan,homeSwitch,awaySwitch,router}
-// }
-
-
-function craftRoute(destinationDevice, sourceDevice) {
-  let route;
-  const { homeSwitch, awaySwitch, router } = getKeyPlayers(sourceDevice);
-  // console.log("source Device", sourceDevice);
-  // console.log("homeSwitch", homeSwitch);
-
-  const sameLan = sourceDevice.lan === destinationDevice.lan; //flag to determinine if this is a singlway or multiway message
-  // craft route for
-
-  if (sameLan) {
-    route = [
-      { from: sourceDevice.id, to: homeSwitch.id },
-      { from: homeSwitch.id, to: destinationDevice.id },
-      { from: destinationDevice.id, to: homeSwitch.id },
-      { from: homeSwitch.id, to: sourceDevice.id },
-    ];
-  } else {
-    route = [
-      { from: sourceDevice.id, to: homeSwitch.id },
-      { from: homeSwitch.id, to: router.id },
-      { from: router.id, to: awaySwitch.id },
-      { from: awaySwitch.id, to: destinationDevice.id },
-      { from: destinationDevice.id, to: awaySwitch.id },
-      { from: awaySwitch.id, to: router.id },
-      { from: router.id, to: homeSwitch.id },
-      { from: homeSwitch.id, to: sourceDevice.id },
-    ];
-  }
-  return route;
-}
 
 
 
 export async function animateICMPEvent(sourceDevice, destinationDevice) {
-
-  // console.log("samelan: ", sameLan);
-
   const route = craftRoute( destinationDevice, sourceDevice);
 
   // console.log("ROUTE", route);
@@ -104,7 +33,7 @@ export function animateARPEvent(sourceDevice, destinationDevice) {
   ));
 
 
-  console.log("otherDevices: ",otherDevices)
+  console.log("\n\n\n otherDevices: ",otherDevices ,"\n\n\n")
 
   const holderArray = []; // to hold other routes that I will generatee
 
@@ -114,15 +43,12 @@ export function animateARPEvent(sourceDevice, destinationDevice) {
     const halfRouteIndex = route.length / 2; //we use this to slice our array halfway to get pur from route
 
     const fromRoute = route.slice(0, halfRouteIndex);
-  console.log("from route: ",fromRoute)
+  // console.log("from route: ",fromRoute)
 
     holderArray.push(fromRoute);
   });
 
-  holderArray.push(mainRoute); //
-
-
-console.log("our holder array",holderArray)
+  holderArray.push(mainRoute); 
 
   const webSocketMessage = { type: "ARPRoute", routes: holderArray };
 
@@ -133,4 +59,49 @@ console.log("our holder array",holderArray)
       client.send(data);
     }
   });
+}
+
+
+// // function to get key-players in ICMP animation
+function getKeyPlayers(sourceDevice){
+  //flag to determinine if this is a singlway or multiway message
+  let homeSwitch = devices.find(
+    (device) =>
+      device.type == "switch" && device.lanSegment == sourceDevice.lanSegment
+  ); //fetch the switch local to our sourceDevice
+  let awaySwitch = devices.find(
+    (device) =>
+      device.type == "switch" && device.lanSegment !== sourceDevice.lanSegment
+  ); //detect remote switch
+  return { homeSwitch, awaySwitch };
+}
+
+
+function craftRoute(destinationDevice, sourceDevice) {
+  let route;
+  const { homeSwitch, awaySwitch } = getKeyPlayers(sourceDevice);
+
+//  console.log("awaySwitch",awaySwitch)
+  
+  const isSameLanSegment = sourceDevice.lanSegment === destinationDevice.lanSegment; //flag to determinine if this is a singlway or multiway message 
+
+  // craft route for
+  if (isSameLanSegment) {
+    route = [
+      { from: sourceDevice.id, to: homeSwitch.id },
+      { from: homeSwitch.id, to: destinationDevice.id },
+      { from: destinationDevice.id, to: homeSwitch.id },
+      { from: homeSwitch.id, to: sourceDevice.id },
+    ];
+  } else {
+    route = [
+      { from: sourceDevice.id, to: homeSwitch.id },
+      { from: homeSwitch.id, to: awaySwitch.id },
+      { from: awaySwitch.id, to: destinationDevice.id },
+      { from: destinationDevice.id, to: awaySwitch.id },
+      { from: awaySwitch.id, to: homeSwitch.id },
+      { from: homeSwitch.id, to: sourceDevice.id },
+    ];
+  }
+  return route;
 }

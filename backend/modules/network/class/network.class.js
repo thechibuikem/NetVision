@@ -90,28 +90,19 @@ export class Device {
 }
 //Class for Pcs in our system, that we'll use as key players in our system
 export class PC extends Device {
-  constructor(deviceName, mac, arp = [], ip, networkInterface, lan) {
+  constructor(deviceName, mac, arp = [], ip, networkInterface, lanSegment) {
     super(deviceName, mac, arp, "pc");
     this.ip = ip;
     this.networkInterface = networkInterface;
-    this.lan = lan;
+    this.lanSegment = lanSegment;
   }
 } 
  //Class for switch, that serve as connectors within LANs
 export class Switch extends Device {
-  constructor(deviceName, mac, arp = [], ip, networkInterface, lan) {
+  constructor(deviceName, mac, arp = [], ip, networkInterface, lanSegment) {
     super(deviceName, mac, arp, "switch");
     this.ip = ip;
     this.networkInterface = networkInterface;
-    this.lan = lan;
+    this.lanSegment = lanSegment;
   }
 }
-//Class for Routers, that serve as connectors between LANs
-export class Router extends Device {
-  constructor(deviceName, mac, arp = [], ip = [], networkInterfaces) {
-    super(deviceName, mac, arp, "router");
-    this.arp = arp;
-    this.ip = ip;
-    this.networkInterfaces = networkInterfaces;
-  }
-} 

@@ -1,6 +1,4 @@
 import { useEffect, useState } from "react";
-// import { useContext } from "react";
-// import { AppContext } from "../../api/context";
 import ReactFlow, {
   ReactFlowProvider,
   Background,
@@ -20,14 +18,11 @@ const {initialNodes,initialEdges,nodeTypes} = accessRfRequirements()
 
 // inner reactFlow component, where I can use useReactFlow because it's wrapped with a provider
 function NetworkFlowInner() {
-  const { setViewport, getNodes, viewportInitialized, getViewport } =
-    useReactFlow(); //rf's adjust diagram & node retrieval hook
-  // const { devices } = useContext(AppContext)!;
+  const { setViewport, getNodes, viewportInitialized, getViewport } = useReactFlow(); //rf's adjust diagram & node retrieval hook
   const [unicastRoutes, setUnicastRoutes] = useState<NodeRoute[]>([]); //icmp  route state array
   const [rfUnicastRoutes, setRfUnicastRoutes] = useState<NodeRoute[]>([]);
   const [packet, setPacket] = useState<{ x: number; y: number } | null>(null); //for the current position of the packet
   const [packets, setPackets] = useState<{ x: number; y: number }[]>([]);
-
   const [multicastRoutes, setMulticastRoutes] = useState<NodeRoute[][]>([]); //arp route state array
   const [rfMulticastRoutes, setRfMulticastRoutes] = useState<NodeRoute[][]>([]);
   const nodes = getNodes();
