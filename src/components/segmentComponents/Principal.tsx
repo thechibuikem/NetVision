@@ -3,7 +3,7 @@ import Logs from "../sectionComponents/Logs";
 
 function Principal() {
   return (
-    <figure className="flex flex-col lg:flex-row gap-x-12 gap-y-12 items-center justify-center bg-black min-w-screen max-w-full w-full min-h-screen h-fit px-4 md:px-8">
+    <figure className="flex flex-col lg:flex-row min-w-screen w-full min-h-screen h-auto gap-x-12 items-center justify-center px-4 md:px-8">
       <NetworkFlow />
       <Logs />
     </figure>

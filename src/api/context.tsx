@@ -14,6 +14,12 @@ interface ARPEntry{
   ip:string
 }
 
+
+interface MACTableEntry {
+  mac: string;
+  interface: string;
+}
+
 // The Type for arpTable which is an object
 export interface arpTable {
   [ip: string]: string;
@@ -21,13 +27,14 @@ export interface arpTable {
 
 // Every Basic device in our network should have these
 export type Device = {
-  id:number
+  id: number;
   deviceName: string;
   ip: string;
   mac: string;
   networkInterface?: string;
   // interfaces?: string[];
-  arp: ARPEntry[];
+  arpTable?: ARPEntry[];
+  macTable?: MACTableEntry[];
 };
 
 type AppContextType = {
@@ -79,12 +86,15 @@ export const AppProvider = ({ children }: { children: ReactNode }) => {
         const retrievedDevices = data.devices;
 
         // console.log("Devices", retrievedDevices);
-        setDevices(retrievedDevices); //populate our devices state with device data from backend
+        setDevices(retrievedDevices.map((d:Device) => ({ ...d }))); //populate our devices state with device data from backend
       } catch (err) {
         console.error(err);
       }
     })();
   }, [endPoint]);
+
+
+console.log(devices)
 
   return React.createElement(
     AppContext.Provider,

@@ -10,7 +10,6 @@ import { accessRfRequirements } from "../../utils/reactFlowNodesProvider";
 import Packet from "../asIsComponents/packet";
 import { getNodeRoute } from "../../utils/getRfNodeRoutes";
 //=============TYPES===========
-
 import {type NodeRoute } from "../../utils/getRfNodeRoutes";
 
 //getting rf requirements e.g initial node, initial edges & custom node types
@@ -26,17 +25,24 @@ function NetworkFlowInner() {
   const [multicastRoutes, setMulticastRoutes] = useState<NodeRoute[][]>([]); //arp route state array
   const [rfMulticastRoutes, setRfMulticastRoutes] = useState<NodeRoute[][]>([]);
   const nodes = getNodes();
-
+  
   // 1. Viewport setup
   useEffect(() => {
     // dynamically adjusting the centering and zoom of my react-flow diagram
     const width: number = window.innerWidth; //screen width
-    if (width < 600) {
+      
+      if (width < 370) {
+        setViewport({ x: 12, y: 120, zoom: 0.3});
+    } else if (width < 400) {
+        setViewport({ x: 30, y: 120, zoom: 0.3 });
+    } else if (width < 500) {
       setViewport({ x: 25, y: 100, zoom: 0.35 });
+    } else if (width < 600) {
+      setViewport({ x: 30, y: 100, zoom: 0.3 });
     } else if (width < 1024) {
       setViewport({ x: 100, y: 150, zoom: 0.6 });
     } else if (width < 1600) {
-      setViewport({ x: 100, y: 100, zoom: 0.6 });
+      setViewport({ x: 75, y: 100, zoom: 0.6 });
     } else {
       setViewport({ x: 100, y: 100, zoom: 1 });
     }
@@ -232,7 +238,7 @@ function NetworkFlowInner() {
 // initializing entire reactFlow graph component
  export default function NetworkFlow() {
   return (
-    <section className=" w-full lg:w-[60%] lg:h-[80vh]">
+    <section className=" w-full lg:w-[60%] lg:h-[80vh] mt-16 lg:mt-0">
       <SectionTitle name="Networks" />
       <div className="lg:h-full h-[50vh] border transparent-black-cards w-full border-[#ffffff30] rounded-lg shadow-sm hover:shadow-sm shadow-[#1a4f265b] hover:-translate-y-1 transition-all duration-300 justify-center items-center bg-black">
         <ReactFlowProvider>

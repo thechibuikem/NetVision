@@ -17,7 +17,7 @@ interface DataProps{
 
 export interface RfNode {
   id:string,
-  type:string,
+  type?:string,
   position:Coordinates
   data:DataProps
 }
