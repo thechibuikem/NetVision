@@ -86,12 +86,26 @@ export const AppProvider = ({ children }: { children: ReactNode }) => {
         const retrievedDevices = data.devices;
 
         // console.log("Devices", retrievedDevices);
-        setDevices(retrievedDevices.map((d:Device) => ({ ...d }))); //populate our devices state with device data from backend
+        setDevices(retrievedDevices); //populate our devices state with device data from backend
       } catch (err) {
         console.error(err);
       }
     })();
   }, [endPoint]);
+
+// Socket to get devices
+useEffect(()=>{
+const socket = new WebSocket("ws://localhost:5000")
+socket.onmessage=(event)=>{
+  const data = JSON.parse(event.data)
+  if (data.type === "devices"){
+    const devicesArray:Device[] = data.devices;
+    setDevices(devicesArray)
+  }
+}
+
+},[])
+
 
 
 console.log(devices)

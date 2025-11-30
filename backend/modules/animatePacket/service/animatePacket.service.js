@@ -1,9 +1,7 @@
+
 import { wss } from "../../../server.js";
 import WebSocket from "ws";
 import { devices } from "../../network/database/network.db.js"
-
-
-
 
 
 
@@ -33,7 +31,7 @@ export function animateARPEvent(sourceDevice, destinationDevice) {
   ));
 
 
-  console.log("\n\n\n otherDevices: ",otherDevices ,"\n\n\n")
+  // console.log("\n\n\n otherDevices: ",otherDevices ,"\n\n\n")
 
   const holderArray = []; // to hold other routes that I will generatee
 

@@ -14,9 +14,6 @@ type TippyProps = {
 };
 
 
-
-
-
 // Modal showing additional information
 function AdditionalInfo({requiredDevice}: TippyProps): ReactElement {
       
@@ -56,6 +53,8 @@ const NetworkDevice: FC<NetworkDeviceProps> = ({ Logo, deviceId }):ReactElement 
   const {devices} = useContext(AppContext)!;
   // identifying required device object
   const requiredDevice:Device = devices[deviceId];
+
+
   return (
     <figure className="text-white flex flex-col items-center gap-y-2 border-dashed border-white relative">
       {/* Network device Icon */}

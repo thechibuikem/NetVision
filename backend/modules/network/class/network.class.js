@@ -46,8 +46,8 @@ export class PC extends Device {
   }
 
   // function for devices to log
-  async log (actionType, targetIP, layer, message) {
-    await logEvent(actionType, this, targetIP, layer, message);
+  async log (actionType,sourceMac, targetIP, layer) {
+    await logEvent(actionType, sourceMac, targetIP, layer);
   }
 
   //send ping method
@@ -71,22 +71,22 @@ export class PC extends Device {
         // log arp request
         await this.log(
           "ARP Request",
+          this.mac,
           destinationIP,
-          "Layer 2 - Data Link",
-          `Who has ${destinationIP}? Tell ${this.mac} \n`
+          "Layer 2 - Data Link"
         );
         //arp reply log
         setTimeout(() => {
           this.log(
             "ARP Reply",
+            this.mac,
             destinationIP,
             "Layer 2 - Data Link",
-            `Who has ${destinationIP}? Tell ${this.mac} \n`
           );
         }, 4000);
 
         
-
+//sending arp request
         await arpRequest(this, destinationIP); // send ARP request out to complete a round
         setTimeout(() => {
           this.animateARP(destinationIP);
@@ -96,7 +96,7 @@ export class PC extends Device {
         }, 8000);
       }
 
-      //===== If recieving device is present on source devices ARP table====
+      //=====ICMP ========
       else {
         console.log(` ping ${round} successful`);
         // setTimeout(async () => {
@@ -105,19 +105,19 @@ export class PC extends Device {
             this.mac,
             destinationIP,
             "Layer 3 - Network",
-            `ICMP ECHO from ${this.mac} to ${receivingDevice.mac} \n`
           );
-        // }, 1000);
+    
 
         //icmp reply log
         setTimeout(() => {
           this.log(
             "ICMP Reply",
+            this.mac,
             destinationIP,
             "Layer 2 - Data Link",
-            `Who has ${destinationIP}? Tell ${this.mac} \n`
           );
         }, 3500);
+
 
         setTimeout(() => {
           this.animateICMP(destinationIP);

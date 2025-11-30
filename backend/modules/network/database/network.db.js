@@ -1,4 +1,5 @@
-import {PC,Switch } from "../class/network.class.js";
+import {PC,Switch } from "../class/network.class.js"
+
 
 // The arrays holding our device elements
  const pcs = [
@@ -90,7 +91,16 @@ devicesWithoutId.forEach((device,index)=>{device.id = index})
 
 export const devices = devicesWithoutId;
 
+
+
 // console.log(devices)
+  // const webSocketMessage = { type: "devices", devices: devices };
+  // const data = JSON.stringify(webSocketMessage);
+  // wss.clients.forEach((client) => {
+  //   if (client.readyState === WebSocket.OPEN) {
+  //     client.send(data);
+  //   }
+  // });
 
 
 
