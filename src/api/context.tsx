@@ -32,6 +32,7 @@ export type Device = {
   ip: string;
   mac: string;
   networkInterface?: string;
+  lanSegment?:string
   // interfaces?: string[];
   arpTable?: ARPEntry[];
   macTable?: MACTableEntry[];

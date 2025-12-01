@@ -24,7 +24,7 @@ function AdditionalInfo({requiredDevice}: TippyProps): ReactElement {
       <h5>IP: {requiredDevice?.ip}</h5>
       <h5>MAC: {requiredDevice?.mac}</h5>
       <h5>INTERFACE: {requiredDevice?.networkInterface}</h5>
-      <h5>LAN: LAN 1</h5>
+      <h5>LAN SEGMENT: {requiredDevice?.lanSegment}</h5>
       {/* arp cache */}
       {requiredDevice?.arpTable && <h5>ARP: </h5>}
       <ul>
