@@ -12,7 +12,7 @@ function PingModal(): ReactElement {
   const destinationRef = useRef<HTMLInputElement | null>(null);
 
   // destructure state an setter from context
-  const endpoint = "http://localhost:5000/api/ping/sendPing";
+  const endpoint = "https://netvision-service.onrender.com/api/ping/sendPing";
 
   async function handleSubmit(e: React.FormEvent) {
     e.preventDefault();

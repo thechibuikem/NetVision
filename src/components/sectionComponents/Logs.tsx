@@ -14,7 +14,7 @@ function Logs(): ReactElement {
   // let newArray:LogType[]=[]
 //1. Socket to monitor logs  
 useEffect(()=>{
-  const socket = new WebSocket("ws://localhost:5000");
+  const socket = new WebSocket("wss://netvision-service.onrender.com");
   socket.onmessage = (event) => {
     const data = JSON.parse(event.data);
     if (data.type === "newLog") {

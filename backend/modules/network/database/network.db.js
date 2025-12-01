@@ -93,17 +93,6 @@ export const devices = devicesWithoutId;
 
 
 
-// console.log(devices)
-  // const webSocketMessage = { type: "devices", devices: devices };
-  // const data = JSON.stringify(webSocketMessage);
-  // wss.clients.forEach((client) => {
-  //   if (client.readyState === WebSocket.OPEN) {
-  //     client.send(data);
-  //   }
-  // });
-
-
-
 
 
 

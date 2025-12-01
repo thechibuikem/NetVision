@@ -84,7 +84,7 @@ export const AppProvider = ({ children }: { children: ReactNode }) => {
   const [authErrorMsg, setAuthErrorMsg] = useState<string>('');
 // console.log(devices)
   //   Backend endpoint to retrieve devices
-  const endPoint = "http://localhost:5000/api/network/devices";
+  const endPoint = "https://netvision-service.onrender.com/api/network/devices";
 
   //   Side effect to retrieve devices from Backend
   useEffect(() => {
@@ -109,7 +109,7 @@ export const AppProvider = ({ children }: { children: ReactNode }) => {
 
 // Socket to get devices
 useEffect(()=>{
-const socket = new WebSocket("ws://localhost:5000")
+const socket = new WebSocket("wss://netvision-service.onrender.com");
 socket.onmessage=(event)=>{
   const data = JSON.parse(event.data)
   if (data.type === "devices"){

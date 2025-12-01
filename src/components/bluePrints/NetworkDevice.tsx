@@ -1,7 +1,6 @@
 import Tippy from "@tippyjs/react";
 import { type FC, type ReactElement, useContext } from "react";
 import { type Device, AppContext } from "../../api/context";
-// import {} from "../../api/context";:
 
 export type NetworkDeviceProps = {
   Logo: ReactElement;

@@ -50,7 +50,7 @@ function NetworkFlowInner() {
 
   // 2. catch unicast-packet flow routes from web-sockets
   useEffect(() => {
-    const socket = new WebSocket("ws://localhost:5000");
+    const socket = new WebSocket("wss://netvision-service.onrender.com");
     socket.onmessage = (event) => {
       const data = JSON.parse(event?.data); //check backend response
       if (data?.type == "ICMPRoute") {
