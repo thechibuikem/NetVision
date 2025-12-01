@@ -2,12 +2,13 @@
 // import bodyParser from "body-parser"
 import http from "http"
 import express from "express";
+import dotenv from "dotenv"
 import cors from "cors"
 import { WebSocketServer } from "ws";
 import pingRoutes from "./modules/ping/routes/ping.route.js";
 import networkRoutes from "./modules/network/routes/network.routes.js"
 
-
+dotenv.config()
 const app = express();
 
 export const server = http.createServer(app);
@@ -56,6 +57,6 @@ export function broadcast (data) {
 
 
 
-server.listen(5000, async () => {
+server.listen(process.env.PORT||5000, async () => {
   console.log("Server running on port 5000 ✅");
 });
