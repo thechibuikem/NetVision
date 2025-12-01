@@ -22,11 +22,10 @@ useEffect(()=>{
               ...logsArray,
               { layer: data.layer, message: data.message },
             ];
-            setLogsArray(newArray);
       setLogsArray(newArray);
     }
   };
-},[logsArray])
+},[])
 
    return (
      <section className=" w-full lg:w-[40%] lg:min-h-[80vh] h-[50vh] min-h-fit my-24">
