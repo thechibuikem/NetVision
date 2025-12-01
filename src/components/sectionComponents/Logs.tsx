@@ -13,16 +13,18 @@ function Logs(): ReactElement {
   const [logsArray, setLogsArray] = useState<LogType[]>([]);
   // let newArray:LogType[]=[]
 //1. Socket to monitor logs  
+let holderArray:LogType[] = []
 useEffect(()=>{
   const socket = new WebSocket("wss://netvision-service.onrender.com");
   socket.onmessage = (event) => {
     const data = JSON.parse(event.data);
     if (data.type === "newLog") {
-            const newArray: LogType[] = [
-              ...logsArray,
-              { layer: data.layer, message: data.message },
-            ];
-      setLogsArray(newArray);
+            // const newArray: LogType[] = [
+            //   ...logsArray,
+            //   { layer: data.layer, message: data.message },
+            // ];
+            holderArray.push({ layer: data.layer, message: data.message }),
+      setLogsArray(holderArray);
     }
   };
 },[])
