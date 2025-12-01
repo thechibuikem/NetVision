@@ -1,7 +1,7 @@
 // importing dependencies
 // import bodyParser from "body-parser"
 // import http from "http"
-import https from "https"
+import http from "http"
 import express from "express";
 import dotenv from "dotenv"
 import cors from "cors"
@@ -13,7 +13,7 @@ dotenv.config()
 const app = express();
 
 // export const server = http.createServer(app);
-export const server = https.createServer(app);
+export const server = http.createServer(app);
 app.use(express.json());//also a bodyparser middleware
 app.use(
   cors({
