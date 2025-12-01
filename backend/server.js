@@ -18,7 +18,6 @@ app.use(express.json());//also a bodyparser middleware
 app.use(
   cors({
     origin: "https://net-vision7.vercel.app", // frontend URL
-    credentials: true, // if sending cookies
   })
 );
 app.use("/api/ping", pingRoutes);
