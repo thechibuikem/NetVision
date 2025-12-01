@@ -15,7 +15,12 @@ const app = express();
 // export const server = http.createServer(app);
 export const server = https.createServer(app);
 app.use(express.json());//also a bodyparser middleware
-app.use(cors())
+app.use(
+  cors({
+    origin: "https://net-vision7.vercel.app", // frontend URL
+    credentials: true, // if sending cookies
+  })
+);
 app.use("/api/ping", pingRoutes);
 app.use("/api/network",networkRoutes)//route for networks
 // handling websocket operations
