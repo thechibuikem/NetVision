@@ -45,7 +45,6 @@ export const wss = new WebSocketServer({ server });// Create WebSocket server on
 export function broadcast (data) {
   wss.clients.forEach((client) => {
     if (client.readyState === 1) {
-      // OPEN
       client.send(JSON.stringify(data));
     }
   });
