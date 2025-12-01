@@ -36,7 +36,7 @@ export function animateARPEvent(sourceDevice, destinationDevice) {
   const holderArray = []; // to hold other routes that I will generatee
 
   otherDevices.forEach((device) => {
-    const route = craftRoute(device, sourceDevice);
+    const route = craftRoute(device,sourceDevice);
 
     const halfRouteIndex = route.length / 2; //we use this to slice our array halfway to get pur from route
 

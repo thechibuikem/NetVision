@@ -2,7 +2,7 @@ import {PC,Switch } from "../class/network.class.js"
 
 
 // The arrays holding our device elements
- const pcs = [
+ export const pcs = [
    {
      name: "PC 1",
      ip: "192.168.1.1",

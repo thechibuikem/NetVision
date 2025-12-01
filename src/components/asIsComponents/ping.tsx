@@ -5,23 +5,23 @@ import type { ReactElement } from "react";
 
 function PingModal(): ReactElement {
   const context = useContext(AppContext)!;
-  const { isSubmitting, setIsSubmitting } = context;
+  const { setShowPing,isSubmitting, setIsSubmitting, setAuthErrorMsg } = context;
 
   // creating ref containers
   const sourceRef = useRef<HTMLInputElement | null>(null);
   const destinationRef = useRef<HTMLInputElement | null>(null);
 
   // destructure state an setter from context
-  const { setShowPing } = context;
   const endpoint = "http://localhost:5000/api/ping/sendPing";
 
   async function handleSubmit(e: React.FormEvent) {
     e.preventDefault();
-    // targetting refs contents
+
+    //cancel submit if one is on going
     if (isSubmitting) {
       console.log("A ping is already on going");
       return;
-    } //cancel submit if one is on going
+    }
 
     setIsSubmitting(true); //set flag once a sumit has started
 
@@ -36,11 +36,14 @@ function PingModal(): ReactElement {
       if (!res.ok) {
         console.log("Backend Response was not okay");
       }
+      //using response
+      const data = await res.json();
+      if (data.error) setAuthErrorMsg(data.error);
     } catch (err) {
       console.log(err);
     } finally {
-      setShowPing(false)
       setIsSubmitting(false);
+      setShowPing(false);
     }
   }
 
@@ -49,12 +52,11 @@ function PingModal(): ReactElement {
     <form
       className="absolute flex flex-col gap-y-4 w-56 h-fit transparent-black-cards -left-1/6 -translate-x-1/2 -top-1/2 translate-y-1/12 p-4 zImportant hover:shadow-lg hover:shadow-[#1a4f265b]"
       onSubmit={handleSubmit}
-      //  onMouseOver={()=>{setShowPing(true)}}
-      //  onMouseOut={()=>{setShowPing(false)}}
+
     >
       <button
-        className="absolute right-4 top-4 text-[#ffffff80] cursor-pointer"
-        onClick={() => setShowPing(false)}
+        className="absolute right-4 top-4 text-[#ffffff80] cursor-pointer hover:text-red-500"
+        onClick={() => {setShowPing(false)}}
       >
         <h5>x</h5>
       </button>
@@ -96,6 +98,7 @@ export function PingBtn(): ReactElement {
   const context = useContext(AppContext)!
   const { showPing, setShowPing } = context;
 
+  console.log(showPing)
   return (
     <section className="relative">
       {showPing && <PingModal />}

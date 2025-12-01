@@ -31,7 +31,7 @@ useEffect(()=>{
    return (
      <section className=" w-full lg:w-[40%] lg:min-h-[80vh] h-[50vh] min-h-fit my-24">
        <SectionTitle name="Logs" />
-       <figure className="w-full md:min-h-[80vh] md:h-full h-full flex flex-col rounded-lg border-[#ffffff30] border p-4 gap-4 cursor-pointer transition-all shadow-sm hover:shadow-xl shadow-[#1a4f265b] duration-300 transparent-black-cards overflow-scroll">
+       <figure className="w-full md:min-h-[80vh] md:h-full h-full flex flex-col rounded-lg border-[#ffffff30] border p-4 gap-4 cursor-pointer transition-all shadow-sm hover:shadow-xl  duration-300 transparent-black-cards overflow-scroll">
          <button className="ml-auto" onClick={()=>{setLogsArray([])}}>
            <FaRegTrashCan size={20} className="hover:text-red-500 cursor-pointer"/>
          </button>

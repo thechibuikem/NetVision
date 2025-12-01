@@ -59,7 +59,7 @@ const NetworkDevice: FC<NetworkDeviceProps> = ({ Logo, deviceId }):ReactElement 
     <figure className="text-white flex flex-col items-center gap-y-2 border-dashed border-white relative">
       {/* Network device Icon */}
       <Tippy
-        className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/4 shadow-xl shadow-[#1a4f265b]"
+        className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/4 shadow-xl"
         content={<AdditionalInfo requiredDevice={requiredDevice} />}
       >
         <div className="shadow-lg flex justify-center items-center  shadow-[#1a4f265b] border border-[#2dd11079] bg-black cursor-pointer w-24 aspect-square rounded-md">

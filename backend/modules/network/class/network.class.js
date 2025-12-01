@@ -52,7 +52,7 @@ export class PC extends Device {
 
   //send ping method
   async ping (destinationIP, round = 1, limit = 4) {
-    // let isPinging = false //flag to check if there's an ongoing ping
+    let isPinging = false //flag to check if there's an ongoing ping
     //base recursive condition
     if (round > limit) {
       console.log("ping process complete \n");

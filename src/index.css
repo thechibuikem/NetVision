@@ -1,11 +1,15 @@
 @import "tailwindcss";
 
 .transparent-cards{
-  @apply shadow-md hover:scale-99 hover:shadow-sm transition-all duration-500 cursor-pointer bg-[#1a4f267c] backdrop-blur-3xl rounded-lg border border-[#ffffff18] text-[#ecececbd]
+  @apply shadow-sm transition-all duration-500 cursor-pointer bg-[#1a4f267c] backdrop-blur-3xl rounded-lg border-2 border-[#ffffff18] text-[#ecececbd] shadow-[#0c3514]
 }
 
 .transparent-black-cards{
-  @apply shadow-md hover:scale-99 hover:shadow-sm transition-all duration-500 cursor-pointer bg-[#000000] backdrop-blur-3xl rounded-lg border border-[#ffffff18] text-[#ecececbd]
+  @apply shadow-sm scale-98 hover:scale-100 shadow-[#1a4f265b] transition-all duration-500 cursor-pointer bg-[#000000] backdrop-blur-3xl rounded-lg border-2 border-[#277d1843] text-[#ecececbd]
+}
+
+.transparent-red-cards{
+  @apply shadow-sm scale-98 hover:scale-100 shadow-[#4f1a1a] transition-all duration-500 cursor-pointer bg-red-950 backdrop-blur-3xl rounded-lg border-2 border-red-800  text-[#ecececbd]
 }
 
 *::-webkit-scrollbar{

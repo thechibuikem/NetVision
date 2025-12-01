@@ -44,23 +44,35 @@ type AppContextType = {
   // Determine if ping modal is visible or not
   showPing: boolean;
   setShowPing: React.Dispatch<React.SetStateAction<boolean>>;
-// checking if there's an ongoing Post request
+  // checking if there's an ongoing Post request
   isSubmitting: boolean;
   setIsSubmitting: React.Dispatch<React.SetStateAction<boolean>>;
+  //ping input validation
+  authErrorMsg: string;
+  setAuthErrorMsg: (msg: string) => void;
 };
 
 // creating context and setting it's default to undefined
 export const AppContext = createContext<AppContextType>({
+  //array of devices from backend
   devices: [],
   setDevices: () => {},
+  // Determine if ping modal is visible or not
+
   showPing: false,
   setShowPing: (showPing) => {
     showPing;
   },
+  // checking if there's an ongoing Post request
+
   isSubmitting: false,
   setIsSubmitting: (isSubmitting) => {
     isSubmitting;
   },
+  //ping input validation
+
+  authErrorMsg: "",
+  setAuthErrorMsg: (value) => value,
 });
 
 // Provider for our context
@@ -68,6 +80,7 @@ export const AppProvider = ({ children }: { children: ReactNode }) => {
   const [devices, setDevices] = useState<Device[]>([]);
   const [showPing,setShowPing]= useState<boolean>(false)
   const [isSubmitting, setIsSubmitting] = useState<boolean>(false);
+  const [authErrorMsg, setAuthErrorMsg] = useState<string>('');
 // console.log(devices)
   //   Backend endpoint to retrieve devices
   const endPoint = "http://localhost:5000/api/network/devices";
@@ -120,6 +133,8 @@ console.log(devices)
         setShowPing,
         isSubmitting,
         setIsSubmitting,
+        authErrorMsg,
+        setAuthErrorMsg,
       },
     },
     children
