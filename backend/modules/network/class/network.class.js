@@ -1,4 +1,4 @@
-import { logEvent } from "../../logs/service/logs.service.js"; //reporter function to send reports of events to front-end
+import { logEvent } from "../../pingLogs/service/pingLogs.service.js";
 import { arpRequest, learnMac } from "../service/network.service.js";
 import { animateICMPEvent } from "../../animatePacket/service/animatePacket.service.js";
 import { devices } from "../database/network.db.js";
