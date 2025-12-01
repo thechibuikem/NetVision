@@ -54,9 +54,8 @@ export function broadcast (data) {
 
 
 
+const PORT = process.env.PORT || 5000;
 
-
-
-server.listen(process.env.PORT||5000, async () => {
-  console.log("Server running on port 5000 ✅");
+server.listen(PORT, () => {
+  console.log(`Server running on port ${PORT} ✅`);
 });
