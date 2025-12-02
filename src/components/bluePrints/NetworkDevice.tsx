@@ -25,7 +25,7 @@ function AdditionalInfo({requiredDevice}: TippyProps): ReactElement {
       <h5>INTERFACE: {requiredDevice?.networkInterface}</h5>
       <h5>LAN SEGMENT: {requiredDevice?.lanSegment}</h5>
       {/* arp cache */}
-      {requiredDevice?.arpTable && <h5>ARP: </h5>}
+      {requiredDevice?.arpTable && <h5>ARP CACHE : </h5>}
       <ul>
         {requiredDevice?.arpTable?.map((element, index) => (
           <li key={index}>
@@ -34,7 +34,7 @@ function AdditionalInfo({requiredDevice}: TippyProps): ReactElement {
         ))}
       </ul>
       {/* mac table */}
-      {requiredDevice?.macTable && <h5>MAC: </h5>}
+      {requiredDevice?.macTable && <h5>MAC TABLE : </h5>}
       <ul>
         {requiredDevice?.macTable?.map((element, index) => (
           <li key={index}>
