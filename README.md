@@ -77,19 +77,20 @@ Born in the heart of fundamental networking, built on react + express. Netvision
 # Tech Stack
 <!-- stack group 1 -->
 ![React](https://img.shields.io/badge/react-%2320232A.svg?style=for-the-badge&logo=react&logoColor=61DAFB)
-![JavaScript](https://img.shields.io/badge/javascript-%23F7DF1E.svg?style=for-the-badge&logo=javascript&logoColor=black)
 ![TypeScript](https://img.shields.io/badge/typescript-%23007ACC.svg?style=for-the-badge&logo=typescript&logoColor=white)
 ![Express.js](https://img.shields.io/badge/express.js-%23404D59.svg?style=for-the-badge&logo=express&logoColor=%2361DAFB)
-
-<!-- stack group 2 -->
-![Node.js](https://img.shields.io/badge/node.js-%23339933.svg?style=for-the-badge&logo=node.js&logoColor=white)
-![JWT](https://img.shields.io/badge/jwt-%23F7DF1E.svg?style=for-the-badge&logo=jwt&logoColor=black)
-![Tailwind](https://img.shields.io/badge/tailwind-%2338B2AC.svg?style=for-the-badge&logo=tailwind-css&logoColor=white)
-![Vite](https://img.shields.io/badge/vite-%236646FF.svg?style=for-the-badge&logo=vite&logoColor=white)
+![JavaScript](https://img.shields.io/badge/javascript-%23F7DF1E.svg?style=for-the-badge&logo=javascript&logoColor=black)
 
 <!-- stack group 3 -->
 ![React Flow](https://img.shields.io/badge/React%20Flow-%2300D8FF?style=for-the-badge)
 ![WebSockets](https://img.shields.io/badge/WebSockets-%234285F4?style=for-the-badge)
+
+<!-- stack group 2 -->
+![Node.js](https://img.shields.io/badge/node.js-%23339933.svg?style=for-the-badge&logo=node.js&logoColor=white)
+![Tailwind](https://img.shields.io/badge/tailwind-%2338B2AC.svg?style=for-the-badge&logo=tailwind-css&logoColor=white)
+![Vite](https://img.shields.io/badge/vite-%236646FF.svg?style=for-the-badge&logo=vite&logoColor=white)
+
+
 
 
 
@@ -101,16 +102,7 @@ Born in the heart of fundamental networking, built on react + express. Netvision
 # Demo
 
 **Check out Kronos in action:**
-
-<div align="center" style="width:full; height:225px; border:1px solid #cccccc20; display:flex; align-items:center; justify-content:center; border-radius:4px;background-color:#00000020">
-  <p style="font-size:18px; font-weight:bold; animation: pulse 2s infinite;">Coming Soon</p>
-</div>
-
-
-
-
-<!-- [![Kronos Demo](./public/demoThumbnail.png)](./public/kronosDemo.mp4) -->
-<!-- *Click the image to play the demo video.* -->
+  ![Demo](./public/netvision-demo.gif)
 
 
 <br>
