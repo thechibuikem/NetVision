@@ -186,7 +186,7 @@ Visit http://localhost:5173 to use NetVision.
 <br>
 
 # License
-This project is licensed under the [MIT](https://creativecommons.org/licenses/by-nc/4.0/) License.
+This project is licensed under the [MIT](LICENSE)
 
 <br>
 <br>
