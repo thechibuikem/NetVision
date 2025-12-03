@@ -23,7 +23,6 @@ else if (actionType === 'ARP Reply'){
     message = `| ${layer} | ${actionType} | From ${destinationIP} tell ${sourceMac} |
     `;
   }
-  // logs.push(message);
 
   // the message our front-end websocket would receive
 const webSocketMessage = {

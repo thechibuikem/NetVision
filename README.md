@@ -1,13 +1,4 @@
 
-<!-- 
-<style>
-@keyframes pulse {
-  0% { opacity: 0.3; }
-  50% { opacity: 1; }
-  100% { opacity: 0.3; }
-}
-</style> -->
-
 <!-- navbar -->
 <p align="center">
   <a href="#overview">README</a> •
@@ -40,7 +31,7 @@
   <a href="https://creativecommons.org/licenses/by-nc/4.0/">
     <img src="https://img.shields.io/badge/License-MIT-blue?style=for-the-badge" alt="License: MIT">
   </a>
-  <img src="https://img.shields.io/badge/Status-Work%20in%20Progress-orange?style=for-the-badge" alt="Project Status">
+  <img src="https://img.shields.io/badge/Status-Completed-green?style=for-the-badge" alt="Project Status">
 </p>
 
 <p align="center">
@@ -103,6 +94,16 @@ Born in the heart of fundamental networking, built on react + express. Netvision
 
 **Check out Kronos in action:**
   ![Demo](./public/netvision-demo.gif)
+
+
+<br>
+<br>
+<br>
+
+
+# System Diagram
+
+ ![Demo](./public/systemDiagram.png)
 
 
 <br>
@@ -193,5 +194,5 @@ This project is licensed under the [MIT](LICENSE)
 <br>
 
  # Docs
-Full documentation coming soon [here](docs/overview.md).
+Full documentation [here](public/docs.md).
 
