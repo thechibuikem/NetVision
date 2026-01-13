@@ -48,7 +48,7 @@
 <br>
 
 # About
-Born in the heart of fundamental networking, built on react + express. Netvision uses Data Structures and Algorithms - and Object Oriented Programming to simulates the low level processes such as the address resolution protocol (ARP) which happens when pings are sent among network devices in a Local Area Network (LAN).
+Born in the heart of fundamental networking, built on react + express. Netvision uses Algorithms - and Object Oriented Programming to simulates the low level processes such as the address resolution protocol (ARP) which happens when pings are sent among network devices in a Local Area Network (LAN).
 <br>
 <br>
 
