@@ -92,7 +92,7 @@ Born in the heart of fundamental networking, built on react + express. Netvision
 
 # Demo
 
-**Check out Kronos in action:**
+**Check out Netvision in action:**
   ![Demo](./public/netvision-demo.gif)
 
 
